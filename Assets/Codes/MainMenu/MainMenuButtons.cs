@@ -8,6 +8,7 @@ public class MainMenuButtons : MonoBehaviour
     void Start()
     {
         Debug.Log("dummy");
+        //hahahahahahha lol lmao
     }
 
     // Update is called once per frame
