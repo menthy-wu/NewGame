@@ -8,4 +8,6 @@ Background art size: 320px x 180px
 
 Tile size: 16 x 16
 
+This is a game made by Menthy and Akira. 
+
 
