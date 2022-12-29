@@ -1,5 +1,7 @@
 # NewGame
 
+A 2D pixel topdown stealth game
+
 Unity Version: 2021.3.1f1
 
 Canvas size: 1920 x 1080
