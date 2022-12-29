@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Player : MonoBehaviour
 {
+    private TMP_Text score;
     private Rigidbody2D rb;
+    int totalScore = 0;
 
     [SerializeField]
     float speed;
@@ -15,6 +17,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        score = GameObject.Find("Score").GetComponent<TMP_Text>();
+        
     }
 
     // Update is called once per frame
@@ -38,10 +42,20 @@ public class Player : MonoBehaviour
         if (collider.CompareTag("Enemy"))
         {
             Die();
+            return;
+        }
+        if(collider.CompareTag("Collection"))
+        {
+            totalScore++;
+            // Debug.Log(totalScore);
+            score.text = totalScore.ToString();
+            Destroy(collider);
         }
     }
 
-    void Die() { }
+    void Die() { 
+        Debug.Log("die");
+    }
 
     void Move()
     {

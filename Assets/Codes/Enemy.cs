@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 public class Enemy : MonoBehaviour
 {
     
-    public GameObject player;
+    private GameObject player;
+    GameObject range;
     [SerializeField] float speed;
-    [SerializeField] float range;
+    [SerializeField] float angle;
     
     private float distance; 
 
@@ -15,33 +16,22 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        range = transform.Find("range").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
-        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, range);
-        foreach(Collider2D elt in collider){
-            if (elt.gameObject.CompareTag("Player")){
-                Follow();
-            }
-        }
         
     }
+    private void faceTowards(GameObject Target) 
+    {
+        Vector2 direction = Target.transform.position - transform.position;
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+    }
 
-    // private void OnTriggerEnter2D(Collider2D obj) {
-    //     if(obj.gameObject.CompareTag("Player")){
-    //         Follow();
-    //     }
-    // }
-
-    // private void OnTriggerExit2D(Collider2D obj) {
-        
-    // }
-
-    private void Follow(){
-        Debug.Log("Follow() called");
+    public void Follow(){
+        faceTowards(player);
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
     }
 }
